@@ -1,0 +1,5 @@
+<meta>
+  <script src = "pb_s.lua" />
+  <script src = "pb_c.lua" type = "client" />
+  <script src = "pb_gui.lua" type = "client" />
+</meta>
