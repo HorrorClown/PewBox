@@ -1,0 +1,6 @@
+--
+-- HorrorClown (PewX)
+-- Using: IntelliJ IDEA 14 Ultimate
+-- Date: 28.01.2014 - Time: 10:55
+-- pewx.de // iGaming-mta.de // iRace-mta.de // iSurvival.de // mtasa.de
+--
