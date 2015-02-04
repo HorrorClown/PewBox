@@ -4,6 +4,7 @@
 -- Date: 28.01.2014 - Time: 10:55
 -- pewx.de // iGaming-mta.de // iRace-mta.de // iSurvival.de // mtasa.de
 --
+local x, y = guiGetScreenSize()
 
 function pb.createGui()
 	pb.gui = {}
@@ -12,11 +13,11 @@ function pb.createGui()
 	
 	pb.gui.window = guiCreateWindow(x-350, y-180, 350, 180, "PewBox", false)
 	
-	guiCreateLabel(10, 10, 100, 20, "State:", false, pb.gui.window)
-	guiCreateLabel(10, 30, 100, 20, "Objects:", false, pb.gui.window)
+	guiCreateLabel(10, 20, 100, 20, "State:", false, pb.gui.window)
+	guiCreateLabel(10, 40, 100, 20, "Objects:", false, pb.gui.window)
 	
-	pb.gui.label[1] = guiCreateLabel(110, 10, 100, 20, "Disabled", false, pb.gui.window)
-	pb.gui.label[2] = guiCreateLabel(110, 30, 100, 20, "-", false, pb.gui.window)
+	pb.gui.label[1] = guiCreateLabel(110, 20, 100, 20, "Disabled", false, pb.gui.window)
+	pb.gui.label[2] = guiCreateLabel(110, 40, 100, 20, "-", false, pb.gui.window)
 		
 	pb.gui.button[1] = guiCreateButton(230, 20, 100, 20, "Toggle", false, pb.gui.window)
 	pb.gui.button[2] = guiCreateButton(230, 45, 100, 20, "Undo", false, pb.gui.window)
@@ -33,6 +34,7 @@ function pb.createGui()
 	
 	--QueryWindow
 	pb.gui.exportWindow = guiCreateWindow(x/2-250/2, y/2-150/2, 250, 150, "Export", false)
+    guiSetVisible(pb.gui.exportWindow, false)
 	pb.gui.radioButton[1] = guiCreateRadioButton(10, 20, 100, 20, "InGame export", false, pb.gui.exportWindow)
 	pb.gui.radioButton[2] = guiCreateRadioButton(10, 45, 100, 20, "Export as xml file", false, pb.gui.exportWindow)
 	pb.gui.radioButton[3] = guiCreateRadioButton(10, 70, 100, 20, "Export as lua script", false, pb.gui.exportWindow)

@@ -8,6 +8,7 @@ pb = {}
 pb.items = {}
 pb.enabled = false
 pb.selectedObject = false
+pb.fCall = {}
 
 addEventHandler("onClientClick", root,
 	function(btn, st, _, _, _, _, _, element)
@@ -25,6 +26,15 @@ bindKey("e", "down",
 			pb.addSelectedItem()
 		end
 	end
+)
+
+bindKey("o", "down",
+    function()
+        if getKeyState("lctrl") then
+           pb.createGui()
+            showCursor(true, true)
+        end
+    end
 )
 
 function pb.addSelectedItem()
@@ -65,7 +75,7 @@ end
 function pb.doExportXML(sName)
 	local file = xmlCreateFile(("export/%s-%s.xml"):format(pb.getDate, sName), sName)
 	if not file then outputChatBox("Invalid filename") return end
-	for i, item in ipairs(pb.items) do
+	for _, item in ipairs(pb.items) do
 		local child = xmlCreateChild(file, "object")
 		for itemKey, itemValue in pairs(item) do
 			xmlNodeSetAttribute(child, itemKey, itemValue)
@@ -74,6 +84,12 @@ function pb.doExportXML(sName)
 	xmlSaveFile(file)
 	xmlUnloadFile(file)
 	outputChatBox("Done.")
+end
+
+function pb.doExportScript(sName)
+    local file = fileCreate(("export/%s-%s.txt"):format(pb.getDate, sName))
+    outputChatBox("Created file!")
+    fileClose(file)
 end
 
 function pb.getDate()
