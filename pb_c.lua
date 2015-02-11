@@ -115,6 +115,15 @@ function pb.getDate()
     return (("%04d_%02d_%02d"):format(time.year+1900, time.month, time.monthday))
 end
 
+function pb.deleteAllItems()
+    for _, item in ipairs(pb.items) do
+        if isElement(item.element) then
+            destroyElement(item.element)
+        end
+    end
+    pb.items = {}
+end
+
 addEventHandler("onClientResourceStart", resourceRoot,
     function()
         pb.createGui()

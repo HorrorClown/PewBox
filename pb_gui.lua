@@ -11,6 +11,7 @@ function pb.createGui()
     pb.gui.button = {}
     pb.gui.label = {}
     pb.gui.radioButton = {}
+    pb.gui.checkBox = {}
     pb.gui.edit = {}
 
     pb.gui.window = guiCreateWindow(x-400, y-180, 400, 180, "PewBox", false)
@@ -38,12 +39,14 @@ function pb.createGui()
     guiCreateLabel(10, 145, 300, 20, "GitHub: http://github.com/HorrorClown/PewBox", false, pb.gui.window)
 
     --QueryWindow
-    pb.gui.exportWindow = guiCreateWindow(x/2-250/2, y/2-150/2, 250, 150, "Export", false)
+    pb.gui.exportWindow = guiCreateWindow(x/2-250/2, y/2-200/2, 250, 200, "Export", false)
     guiSetVisible(pb.gui.exportWindow, false)
     guiWindowSetSizable(pb.gui.exportWindow, false)
     pb.gui.radioButton[1] = guiCreateRadioButton(10, 20, 100, 20, "InGame export", false, pb.gui.exportWindow)
     pb.gui.radioButton[2] = guiCreateRadioButton(10, 45, 200, 20, "Export as xml file", false, pb.gui.exportWindow)
     pb.gui.radioButton[3] = guiCreateRadioButton(10, 70, 200, 20, "Export as lua script", false, pb.gui.exportWindow)
+    pb.gui.checkBox[1] = guiCreateCheckBox(10, 135, 200, 20, "Delete object after export", false, false, pb.gui.exportWindow)
+    pb.gui.checkBox[2] = guiCreateCheckBox(10, 160, 200, 20, "Clear list after export", false, false, pb.gui.exportWindow)
     pb.gui.edit[1] = guiCreateEdit(10, 110, 100, 20, "", false, pb.gui.exportWindow)
     pb.gui.button[5] = guiCreateButton(130, 110, 100, 20, "Export", false, pb.gui.exportWindow)
     pb.gui.button[6] = guiCreateButton(220, 25, 20, 20, "X", false, pb.gui.exportWindow)
@@ -52,6 +55,7 @@ function pb.createGui()
 end
 
 function pb.doExport()
+    guiSetInputEnabled(false)
     local fileName = guiGetText(pb.gui.edit[1])
     if (not fileName) or (fileName == "") then outputChatBox("Please enter a valid file/table name!") return end
     if guiRadioButtonGetSelected(pb.gui.radioButton[1]) then
@@ -62,13 +66,25 @@ function pb.doExport()
         pb.doExportScript(fileName)
     end
 
+    if guiCheckBoxGetSelected(pb.gui.checkBox[1]) then
+        pb.deleteAllItems()
+        pb.items = {}
+    end
+
+    if guiCheckBoxGetSelected(pb.gui.checkBox[2]) then
+        pb.clear()
+    end
+
     guiSetVisible(pb.gui.exportWindow, false)
     guiSetEnabled(pb.gui.window, true)
+    pb.setObjectCount(#pb.items)
+    guiSetInputEnabled(false)
 end
 
 function pb.cancelExport()
     guiSetVisible(pb.gui.exportWindow, false)
     guiSetEnabled(pb.gui.window, true)
+    guiSetInputEnabled(false)
 end
 
 function pb.setState(sText)
