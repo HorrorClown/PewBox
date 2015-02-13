@@ -32,7 +32,7 @@ function pb.createGui()
     pb.fCall[pb.gui.button[1]] = {pb.toggle}
     pb.fCall[pb.gui.button[2]] = {pb.undo}
     pb.fCall[pb.gui.button[3]] = {pb.clear}
-    pb.fCall[pb.gui.button[4]] = {function() guiSetVisible(pb.gui.exportWindow, true) guiSetEnabled(pb.gui.window, false) end}
+    pb.fCall[pb.gui.button[4]] = {function() guiSetVisible(pb.gui.exportWindow, true) guiSetEnabled(pb.gui.window, false) guiSetInputEnabled(true) end}
 
     --Info labels
     guiCreateLabel(10, 125, 300, 20, "Press 'ctrl + r' to add a selected object!", false, pb.gui.window)
@@ -55,7 +55,6 @@ function pb.createGui()
 end
 
 function pb.doExport()
-    guiSetInputEnabled(false)
     local fileName = guiGetText(pb.gui.edit[1])
     if (not fileName) or (fileName == "") then outputChatBox("Please enter a valid file/table name!") return end
     if guiRadioButtonGetSelected(pb.gui.radioButton[1]) then
