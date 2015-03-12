@@ -127,5 +127,6 @@ end
 addEventHandler("onClientResourceStart", resourceRoot,
     function()
         pb.createGui()
+        outputChatBox("PewBox started! Press 'CTRL + O' to open the windows.", 255, 255, 255)
     end
 )
